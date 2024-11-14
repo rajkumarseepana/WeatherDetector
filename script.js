@@ -16,7 +16,7 @@ let target = 'Srikakulam';
 const fetchResults = async (targetLocation) => {
     try {
         // Construct the API URL for WeatherAPI
-        const weatherUrl = `http://localhost:8080/http://api.weatherapi.com/v1/current.json?key=your-api-key&q=srikakulam&aqi=no`;
+        const weatherUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(targetLocation)}&aqi=no`;
 
         let res = await fetch(weatherUrl);
 
