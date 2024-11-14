@@ -47,17 +47,17 @@ const fetchResults = async (targetLocation) => {
 
 // Function to update weather details on the page
 function updateDetails(temp, locationName, time, condition) {
-    // Create a Date object using the local time from the API response
-    const dateObject = new Date(time);
-    const currentDay = getDayName(dateObject.getDay()); // Use getDay() directly on the Date object
+    // Parse the local time from the API response
+    const dateObject = new Date(time);  // Directly use the Date constructor
+    const currentDay = getDayName(dateObject.getDay()); // Get the day using getDay()
 
-    // Format date and time
-    const formattedDate = dateObject.toLocaleDateString(); // Date in YYYY-MM-DD format
-    const formattedTime = dateObject.toLocaleTimeString(); // Time in HH:MM:SS format
+    // Format the date and time string
+    const splitDate = dateObject.toLocaleDateString(); // Formats the date
+    const splitTime = dateObject.toLocaleTimeString(); // Formats the time
 
     temperatureField.innerText = `${temp} °C`;
     locationField.innerText = locationName;
-    dateandTimeField.innerText = `${currentDay}, ${formattedDate} ${formattedTime}`;
+    dateandTimeField.innerText = `${currentDay}, ${splitDate} ${splitTime}`;
     conditionField.innerText = condition;
 
     // Highlight the weather container
