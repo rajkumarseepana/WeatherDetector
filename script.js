@@ -31,7 +31,7 @@ const fetchResults = async (targetLocation) => {
         const locationName = data.location.name;
         const temp = data.current.temp_c; // Temperature in Celsius
         const condition = data.current.condition.text; // Weather condition description
-        const time = new Date().toLocaleString(); // Get current time
+        const time = data.location.localtime; // Get local time for location
 
         // Update the UI with fetched data
         updateDetails(temp, locationName, time, condition);
@@ -47,8 +47,10 @@ const fetchResults = async (targetLocation) => {
 
 // Function to update weather details on the page
 function updateDetails(temp, locationName, time, condition) {
-    const [splitDate, splitTime] = time.split(', ');
-    const currentDay = getDayName(new Date(splitDate).getDay());
+    // Parse the local time from the API response
+    const [splitDate, splitTime] = time.split(' ');
+    const dateObject = new Date(time);
+    const currentDay = getDayName(dateObject.getUTCDay());
 
     temperatureField.innerText = `${temp} °C`;
     locationField.innerText = locationName;
